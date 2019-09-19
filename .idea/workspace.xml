@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78cea498-5e6e-45e1-9860-04fb24a25d2b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/paddle.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pong_pyg_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/pong_pyg_main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -81,6 +83,14 @@
       <option name="presentableId" value="Default" />
       <updated>1568853506570</updated>
     </task>
+    <task id="LOCAL-00001" summary="Stopped testing git and started coding">
+      <created>1568856807095</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1568856807095</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -93,5 +103,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Stopped testing git and started coding" />
+    <option name="LAST_COMMIT_MESSAGE" value="Stopped testing git and started coding" />
   </component>
 </project>
