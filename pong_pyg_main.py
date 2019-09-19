@@ -1,7 +1,9 @@
 import pygame
 pygame.init()
-print("Hello!")
-#test1
-#git test
-#git test 2
-#git test 3
+
+RED = (255, 0, 0)
+WHITE = (255, 255, 255)
+
+size = (800, 500)
+screen = pygame.display
+
