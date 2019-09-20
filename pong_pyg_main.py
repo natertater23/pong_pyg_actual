@@ -63,6 +63,18 @@ while gameLoop:
         if event.type == pygame.QUIT:
             gameLoop = False
     # Handle paddle movement with arrow keys
+    if (scoreA == 11 or scoreB == 11) and (scoreA - scoreB >= 2 or scoreB - scoreA >= 2):
+        if scoreB == 11:
+            game_countB += 1
+            scoreB = 0
+            scoreA = 0
+        else:
+            game_countA += 1
+            scoreB = 0
+            scoreA = 0
+
+    if game_countA == 3 or game_countB == 3:
+        gameLoop = False
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP]:
@@ -129,9 +141,9 @@ while gameLoop:
     # if ball hits a paddle
     if pygame.sprite.collide_mask(ball, paddleA1) or pygame.sprite.collide_mask(ball,
                                                                                 paddleA2) or pygame.sprite.collide_mask(
-            ball, paddleA3) or pygame.sprite.collide_mask(ball, paddleB1) or pygame.sprite.collide_mask(ball,
-                                                                                                        paddleB2) or pygame.sprite.collide_mask(
-            ball, paddleB3):
+        ball, paddleA3) or pygame.sprite.collide_mask(ball, paddleB1) or pygame.sprite.collide_mask(ball,
+                                                                                                    paddleB2) or pygame.sprite.collide_mask(
+        ball, paddleB3):
         ball.bounce()
 
     # Draw necessary items
@@ -152,6 +164,5 @@ while gameLoop:
 
     # 60 FPS
     clock.tick(60)
-
 
 pygame.quit()
