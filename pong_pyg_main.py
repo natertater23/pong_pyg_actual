@@ -76,6 +76,22 @@ while gameLoop:
         paddleB2.move_right(5)
         paddleB3.move_right(5)
 
+    # CPU movements
+    if ball.rect.y < paddleA1.rect.y + 50:
+        paddleA1.move_up(5)
+        if 300 >= paddleA2.rect.x > ball.rect.x:
+            paddleA2.move_left(5)
+        elif 300 >= paddleA2.rect.x < ball.rect.x:
+            paddleA2.move_right(5)
+    elif ball.rect.y > paddleA1.rect.y + 50:
+        paddleA1.move_down(5)
+        if 300 >= paddleA3.rect.x > ball.rect.x:
+            paddleA3.move_left(5)
+        elif 300 >= paddleA3.rect.x < ball.rect.x:
+            paddleA3.move_right(5)
+    else:
+        x = 1
+
     sprites_list.update()
 
     # Check if ball hits a wall( 6 wall pieces to check and then reflect ball)
