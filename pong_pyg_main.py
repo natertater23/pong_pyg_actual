@@ -14,7 +14,7 @@ size = (800, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Pong")
 
-IMAGE = pygame.image.load('paddle.jpg').convert()
+
 
 # create all the paddles and put them in their location( 3 per player)
 
