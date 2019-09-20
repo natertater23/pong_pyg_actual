@@ -1,16 +1,17 @@
 import pygame
+pygame.init()
 RED = (255, 0, 0)
 
 
 class Paddle(pygame.sprite.Sprite):
 
     def __init__(self, color, width, height):
-        super.__init__()
+        super().__init__()
         # create the surface, we make it transparent
         self.image = pygame.Surface([width, height])
         self.image.fill(RED)
         self.image.set_colorkey(RED)
-        # draw rect with given color and width height, coords dont matter since will be moving anyways
+        # draw rect with given color and width height, coordinates don't matter since will be moving anyways
         pygame.draw.rect(self.image, color, [0, 0, width, height])
         # make that rect our rect
         self.rect = self.image.get_rect()
