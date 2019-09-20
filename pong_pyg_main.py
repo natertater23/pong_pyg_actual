@@ -15,25 +15,25 @@ pygame.display.set_caption("Pong")
 
 # create all the paddles and put them in their location( 3 per player)
 paddleA1 = Paddle(WHITE, 10, 100)
-paddleA1.rect.x = 20
+paddleA1.rect.x = 10
 paddleA1.rect.y = 200
-paddleA2 = Paddle(WHITE, 10, 100)
+paddleA2 = Paddle(WHITE, 100, 10)
 paddleA2.rect.x = 20
-paddleA2.rect.y = 100
-paddleA3 = Paddle(WHITE, 10, 100)
+paddleA2.rect.y = 10
+paddleA3 = Paddle(WHITE, 100, 10)
 paddleA3.rect.x = 20
-paddleA3.rect.y = 400
+paddleA3.rect.y = 480
 paddleB1 = Paddle(WHITE, 10, 100)
-paddleB1.rect.x = 770
+paddleB1.rect.x = 780
 paddleB1.rect.y = 200
-paddleB2 = Paddle(WHITE, 10, 100)
-paddleB2.rect.x = 770
-paddleB2.rect.y = 100
-paddleB3 = Paddle(WHITE, 10, 100)
-paddleB3.rect.x = 770
-paddleB3.rect.y = 400
+paddleB2 = Paddle(WHITE, 100, 10)
+paddleB2.rect.x = 650
+paddleB2.rect.y = 10
+paddleB3 = Paddle(WHITE, 100, 10)
+paddleB3.rect.x = 650
+paddleB3.rect.y = 480
 
-ball = Ball(WHITE, 10, 10)
+ball = Ball(WHITE, 12, 12)
 ball.rect.x = 345
 ball.rect.y = 195
 
@@ -69,7 +69,7 @@ while gameLoop:
         paddleB1.move_up(5)
     if keys[pygame.K_DOWN]:
         paddleB1.move_down(5)
-    if keys[pygame.K_LEFT]:
+    if keys[pygame.K_LEFT] and paddleB2.rect.x >= 405:
         paddleB2.move_left(5)
         paddleB3.move_left(5)
     if keys[pygame.K_RIGHT]:
@@ -79,24 +79,36 @@ while gameLoop:
     sprites_list.update()
 
     # Check if ball hits a wall( 6 wall pieces to check and then reflect ball)
-    if ball.rect.x >= 790:
+    if ball.rect.x >= 785:
         scoreA += 1
         ball.velocity[0] = -ball.velocity[0]
-    if ball.rect.x <= 0:
+        ball.rect.x = 345
+        ball.rect.y = 195
+    if ball.rect.x <= 5:
         scoreB += 1
         ball.velocity[0] = -ball.velocity[0]
-    if ball.rect.y >= 490 and ball.rect.x <= 400:
+        ball.rect.x = 345
+        ball.rect.y = 195
+    if ball.rect.y >= 485 and ball.rect.x <= 400:
         scoreB += 1
         ball.velocity[1] = -ball.velocity[1]
-    if ball.rect.y >= 490 and ball.rect.x >= 400:
+        ball.rect.x = 345
+        ball.rect.y = 195
+    if ball.rect.y >= 485 and ball.rect.x >= 400:
         scoreA += 1
         ball.velocity[1] = -ball.velocity[1]
-    if ball.rect.y <= 0 and ball.rect.x <= 400:
+        ball.rect.x = 345
+        ball.rect.y = 195
+    if ball.rect.y <= 5 and ball.rect.x <= 400:
         scoreB += 1
         ball.velocity[1] = -ball.velocity[1]
-    if ball.rect.y <= 0 and ball.rect.x >= 400:
+        ball.rect.x = 345
+        ball.rect.y = 195
+    if ball.rect.y <= 5 and ball.rect.x >= 400:
         scoreA += 1
         ball.velocity[1] = -ball.velocity[1]
+        ball.rect.x = 345
+        ball.rect.y = 195
 
     # if ball hits a paddle
     if pygame.sprite.collide_mask(ball, paddleA1) or pygame.sprite.collide_mask(ball,

@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="78cea498-5e6e-45e1-9860-04fb24a25d2b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ball.py" beforeDir="false" afterPath="$PROJECT_DIR$/ball.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paddle.py" beforeDir="false" afterPath="$PROJECT_DIR$/paddle.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pong_pyg_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/pong_pyg_main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
