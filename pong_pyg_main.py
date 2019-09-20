@@ -2,6 +2,7 @@ import pygame
 
 from ball import Ball
 from paddle import Paddle
+from playsound import playsound
 
 pygame.init()
 
@@ -13,7 +14,10 @@ size = (800, 500)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Pong")
 
+IMAGE = pygame.image.load('paddle.jpg').convert()
+
 # create all the paddles and put them in their location( 3 per player)
+
 paddleA1 = Paddle(WHITE, 10, 100)
 paddleA1.rect.x = 10
 paddleA1.rect.y = 200
@@ -33,7 +37,7 @@ paddleB3 = Paddle(WHITE, 100, 10)
 paddleB3.rect.x = 650
 paddleB3.rect.y = 480
 
-ball = Ball(WHITE, 12, 12)
+ball = Ball(WHITE, 15, 15)
 ball.rect.x = 345
 ball.rect.y = 195
 
@@ -68,15 +72,14 @@ while gameLoop:
             game_countB += 1
             scoreB = 0
             scoreA = 0
+            playsound('winRound.wav')
         else:
             game_countA += 1
             scoreB = 0
             scoreA = 0
-
-    if game_countA == 3 or game_countB == 3:
-        gameLoop = False
-
+            playsound('loseRound.wav')
     keys = pygame.key.get_pressed()
+
     if keys[pygame.K_UP]:
         paddleB1.move_up(5)
     if keys[pygame.K_DOWN]:
@@ -89,20 +92,19 @@ while gameLoop:
         paddleB3.move_right(5)
 
     # CPU movements
+    cpu_vel = 4
     if ball.rect.y < paddleA1.rect.y + 50:
-        paddleA1.move_up(5)
-        if 300 >= paddleA2.rect.x > ball.rect.x:
-            paddleA2.move_left(5)
-        elif 300 >= paddleA2.rect.x < ball.rect.x:
-            paddleA2.move_right(5)
+        paddleA1.move_up(cpu_vel)
+        if paddleA2.rect.x > ball.rect.x:
+            paddleA2.move_left(cpu_vel)
+        elif 250 >= paddleA2.rect.x < ball.rect.x:
+            paddleA2.move_right(cpu_vel)
     elif ball.rect.y > paddleA1.rect.y + 50:
-        paddleA1.move_down(5)
-        if 300 >= paddleA3.rect.x > ball.rect.x:
-            paddleA3.move_left(5)
-        elif 300 >= paddleA3.rect.x < ball.rect.x:
-            paddleA3.move_right(5)
-    else:
-        x = 1
+        paddleA1.move_down(cpu_vel)
+        if paddleA3.rect.x > ball.rect.x:
+            paddleA3.move_left(cpu_vel)
+        elif 250 >= paddleA3.rect.x < ball.rect.x:
+            paddleA3.move_right(cpu_vel)
 
     sprites_list.update()
 
@@ -139,12 +141,15 @@ while gameLoop:
         ball.rect.y = 195
 
     # if ball hits a paddle
-    if pygame.sprite.collide_mask(ball, paddleA1) or pygame.sprite.collide_mask(ball,
-                                                                                paddleA2) or pygame.sprite.collide_mask(
-        ball, paddleA3) or pygame.sprite.collide_mask(ball, paddleB1) or pygame.sprite.collide_mask(ball,
-                                                                                                    paddleB2) or pygame.sprite.collide_mask(
-        ball, paddleB3):
+
+    if pygame.sprite.collide_mask(ball, paddleA1) \
+            or pygame.sprite.collide_mask(ball, paddleA2) \
+            or pygame.sprite.collide_mask(ball, paddleA3) \
+            or pygame.sprite.collide_mask(ball, paddleB1) \
+            or pygame.sprite.collide_mask(ball, paddleB2) \
+            or pygame.sprite.collide_mask(ball, paddleB3):
         ball.bounce()
+        playsound('hit.wav')
 
     # Draw necessary items
     screen.fill(RED)
@@ -153,16 +158,51 @@ while gameLoop:
     # Draw sprites
     sprites_list.draw(screen)
     # update scores
-    font = pygame.font.Font(None, 76)
+    font = pygame.font.Font(None, 20)
     text = font.render(str(scoreA), 1, WHITE)
     text2 = font.render(str(scoreB), 1, WHITE)
-    screen.blit(text, (280, 10))
-    screen.blit(text2, (450, 10))
+    screen.blit(text, (385, 30))
+    screen.blit(text2, (450, 30))
+    font = pygame.font.Font(None, 70)
+    text = font.render(str(game_countA), 1, WHITE)
+    text2 = font.render(str(game_countB), 1, WHITE)
+    screen.blit(text, (350, 5))
+    screen.blit(text2, (420, 5))
+
+    font = pygame.font.Font(None, 20)
+    text = font.render(str("11 pts for round best 3/5 rounds"), 1, WHITE)
+    screen.blit(text, (300, 45))
+
+    if game_countA == 3 or game_countB == 3:
+        if game_countB == 3:
+            playsound('winMATCH.wav')
+            font = pygame.font.Font(None, 80)
+            string = "You Win!"
+            text = font.render(str(string), 1, WHITE)
+            screen.blit(text, (200, 150))
+        else:
+            playsound('loseMATCH.wav')
+            font = pygame.font.Font(None, 80)
+            string = "CPU Wins"
+            text = font.render(str(string), 1, WHITE)
+            screen.blit(text, (200, 150))
+        font = pygame.font.Font(None, 80)
+        string = "Play Again?: (y or n)"
+        text = font.render(str(string), 1, WHITE)
+        screen.blit(text, (200, 250))
+        if keys[pygame.K_y]:
+            scoreA = 0
+            scoreB = 0
+            game_countB = 0
+            game_countA = 0
+        elif keys[pygame.K_n]:
+            gameLoop = False
 
     # update
     pygame.display.flip()
 
     # 60 FPS
     clock.tick(60)
+
 
 pygame.quit()
