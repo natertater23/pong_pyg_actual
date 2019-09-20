@@ -6,12 +6,12 @@ RED = (255, 0, 0)
 
 class Ball(pygame.sprite.Sprite):
 
-    def __init__(self, color, center, radius, width):
+    def __init__(self, color, radius, width):
         super.__init__()
         self.image = pygame.Surface([radius, width])
         self.image.fill(RED)
         self.image.set_colorkey(RED)
-        pygame.draw.circle(self.image, color, center, radius, width)
+        pygame.draw.circle(self.image, color, (0, 0), radius, width)
         self.velocity = [randint(4, 8), randint(-8, 8)]
         self.circle = self.image.get_rect()
 
